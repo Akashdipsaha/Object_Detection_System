@@ -1,90 +1,72 @@
-Object Detection using OpenCV and SSD MobileNet V3
-This is a Python code snippet that demonstrates object detection using OpenCV and the SSD MobileNet V3 architecture. 
-It detects objects in both a single image and a video stream.
+# Real-Time Object Detection Streamlit App
 
-Prerequisites
-OpenCV: pip install opencv-python
-Matplotlib: pip install matplotlib
+This Streamlit application provides real-time object detection capabilities using two different models: YOLOv5 and SSD MobileNet. The app supports both webcam-based real-time detection and offline video file analysis.
 
-Installation
-To install the required packages, run the following command:
-get_ipython().system('pip install opencv-python')
+## Features
 
+- **Real-Time Object Detection**: Detect objects in real-time using your webcam.
+- **Upload and Analyze Video**: Upload a video file (`mp4`, `avi`, `mov`) and perform object detection frame-by-frame.
+- **Multiple Models**: Choose between YOLOv5 (small version) and SSD MobileNet for object detection.
+- **Adjustable Confidence Threshold**: Customize the confidence threshold for object detection to fine-tune results.
 
-Import the necessary libraries:
-import cv2
-import matplotlib.pyplot as plt
+## Setup and Installation
 
-Set the configuration file and frozen model paths:
-config_file = "C:/Users/KIIT/Music/objdetec/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
-frozen_model = "C:/Users/KIIT/Music/objdetec/frozen_inference_graph.pb"
-Load the object detection model:
+### 1. Clone the Repository
 
-model = cv2.dnn_DetectionModel(frozen_model, config_file)
-Load the class labels from a text file:
+git clone https://github.com/your-username/real-time-object-detection-app.git
+cd real-time-object-detection-app
 
-classLabels = []
-file_name = "C:/Users/KIIT/Music/objdetec/label.txt"
-with open(file_name, 'rt') as fpt:
-    classLabels = fpt.read().rstrip('\n').split('\n')
-Set model input parameters:
+2. Install Dependencies
+Make sure you have Python 3.8 or higher installed. Then, install the required Python libraries:
 
-model.setInputSize(320, 320)
-model.setInputScale(1.0/127.5)
-model.setInputMean((127.5, 127.5, 127.5))
-model.setInputSwapRB(True)
-Load and display an image:
+pip install streamlit opencv-python-headless torch torchvision torchaudio streamlit-webrtc matplotlib
 
-img = cv2.imread("C:/Users/KIIT/Music/objdetec/demo.jpg")
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-Perform object detection on the image:
+3. Download the Required Models and Files
+YOLOv5 Model: Download the YOLOv5n model (yolov5n.pt) from Ultralytics YOLOv5 repository.
 
-ClassIndex, confidence, bbox = model.detect(img, confThreshold=0.5)
-Visualize the detected objects on the image:
+SSD MobileNet Model: Download the SSD MobileNet configuration and frozen model files:
 
-font_scale = 3
-font = cv2.FONT_HERSHEY_PLAIN
-for ClassInd, conf, boxes in zip(ClassIndex.flatten(), confidence.flatten(), bbox):
-    cv2.rectangle(img, boxes, (255, 0, 0), 2)
-    cv2.putText(img, classLabels[ClassInd-1], (boxes[0]+10, boxes[1]+40),
-                font, fontScale=font_scale, color=(0, 255, 0), thickness=3)
-plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-Capture video from a file or webcam and perform real-time object detection:
+ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt
+frozen_inference_graph.pb
+COCO Labels: Download the coco.names file containing the class labels for YOLOv5.
 
-screen_width, screen_height = 700, 480
+Place these files in the appropriate paths specified in the streamlit_app.py file or update the paths accordingly.
 
-cap = cv2.VideoCapture(r"C:\Users\KIIT\Music\objdetec\General_public.mov")
+4. Run the App
+Execute the following command to run the Streamlit app:
 
-if not cap.isOpened():
-    cap = cv2.VideoCapture(0)  
-if not cap.isOpened():
-    raise IOError("Cannot open video")
+bash
+Copy code
+streamlit run streamlit_app.py
+Usage
+Select the Mode: Choose between "Webcam" and "Upload Video" modes from the sidebar.
 
-font_scale = 3
-font = cv2.FONT_HERSHEY_PLAIN
+Webcam Mode: Allows real-time detection using your webcam.
+Upload Video Mode: Allows you to upload a video file for analysis.
+Select the Detection Model: Choose between "YOLOv5" and "SSD MobileNet" for object detection.
 
-while True:
-    ret, frame = cap.read()
+Adjust Confidence Threshold: Use the slider to set the desired confidence threshold for detection.
 
-    if not ret:
-        break
+Start Detection:
 
-    frame = cv2.resize(frame, (screen_width, screen_height))
+In "Webcam Mode", the app will start capturing video from your webcam and display detected objects in real-time.
+In "Upload Video Mode", upload a video file, and the app will process each frame, displaying detected objects.
+Requirements
+Python 3.8 or higher
+Webcam (for real-time detection)
+Internet connection (for downloading models and libraries)
+Credits
+Developed by: Akashdip Saha
+YOLOv5: Ultralytics YOLOv5
+SSD MobileNet: TensorFlow Model Zoo
+License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-    classIndex, confidence, bbox = model.detect(frame, confThreshold=0.55)
+markdown
+Copy code
 
-    if len(classIndex) != 0:
-        for ClassInd, conf, boxes in zip(classIndex.flatten(), confidence.flatten(), bbox):
-            if ClassInd <= 80:
-                cv2.rectangle(frame, boxes, (255, 8, 0), 2)
-                cv2.putText(frame, classLabels[ClassInd-1], (boxes[0]+10, boxes[1]+40),
-                            font, fontScale=font_scale, color=(0, 255, 0), thickness=3)
-        
-        cv2.imshow('Object Detection', frame)
-        
-        # Exit on 'q' key press
-        if cv2.waitKey(1) == ord('q'):
-            break
+### Instructions for Customizing the README
 
-cap.release()
-cv2.destroyAllWindows()
+1. **Replace `your-username`**: Change `your-username` in the `git clone` command to your GitHub username.
+2. **Model Links**: Provide direct links to the models and files if necessary.
+3. **Additional Information**: Add any additional information that is specific to your use c
