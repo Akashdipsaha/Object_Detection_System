@@ -28,9 +28,9 @@ YOLOV5N_MODEL_PATH = "yolov5n.pt"
 LABEL_FILE = "coco.names"
 
 # Paths for SSD MobileNet model files
-CONFIG_FILE = "C:/Users/KIIT/Music/objdetec/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
-FROZEN_MODEL = "C:/Users/KIIT/Music/objdetec/frozen_inference_graph.pb"
-LABELS_FILE = "C:/Users/KIIT/Music/objdetec/label.txt"
+CONFIG_FILE = "objdetec/ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt"
+FROZEN_MODEL = "objdetec/frozen_inference_graph.pb"
+LABELS_FILE = "label.txt"
 
 # ==============================
 # Load Labels and Models
