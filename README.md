@@ -12,34 +12,36 @@ This Streamlit application provides real-time object detection capabilities usin
 ## Setup and Installation
 
 ### 1. Clone the Repository
-
+```
 git clone https://github.com/your-username/real-time-object-detection-app.git
 cd real-time-object-detection-app
-
+```
 ### 2. Install Dependencies
 Make sure you have Python 3.8 or higher installed. Then, install the required Python libraries:
 
+```
 pip install streamlit opencv-python-headless torch torchvision torchaudio streamlit-webrtc matplotlib
+```
 
 ### 3. Download the Required Models and Files
 YOLOv5 Model: Download the YOLOv5n model (yolov5n.pt) from Ultralytics YOLOv5 repository.
 
 SSD MobileNet Model: Download the SSD MobileNet configuration and frozen model files:
-
+```
 ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt
 frozen_inference_graph.pb
 COCO Labels: Download the coco.names file containing the class labels for YOLOv5.
-
+```
 Place these files in the appropriate paths specified in the streamlit_app.py file or update the paths accordingly.
 
 ### 4. Run the App
 Execute the following command to run the Streamlit app:
 
-bash
-Copy code
+```
 streamlit run streamlit_app.py
 Usage
 Select the Mode: Choose between "Webcam" and "Upload Video" modes from the sidebar.
+```
 
 Webcam Mode: Allows real-time detection using your webcam.
 Upload Video Mode: Allows you to upload a video file for analysis.
@@ -62,8 +64,6 @@ SSD MobileNet: TensorFlow Model Zoo
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-markdown
-Copy code
 
 ### Instructions for Customizing the README
 
