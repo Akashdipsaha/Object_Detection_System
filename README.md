@@ -39,9 +39,10 @@ Execute the following command to run the Streamlit app:
 
 ```
 streamlit run streamlit_app.py
+```
 Usage
 Select the Mode: Choose between "Webcam" and "Upload Video" modes from the sidebar.
-```
+
 
 Webcam Mode: Allows real-time detection using your webcam.
 Upload Video Mode: Allows you to upload a video file for analysis.
